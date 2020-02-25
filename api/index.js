@@ -7,5 +7,5 @@ const app = express()
 app.use('/api/user', user)
 
 app.listen(config.api.port, () => {
-  console.log('Api runnig on' + config.api.port)
+  console.log('Api runnig on ' + config.api.port)
 })
