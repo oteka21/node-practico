@@ -18,6 +18,13 @@ const db = {
       lastName: 'Oteca',
       age: 24
     }
+  ],
+  auth: [
+    {
+      id: '5VCVmDI72UlB2Oy4uQqjx',
+      username: 'eldita',
+      password: '$2b$05$6MWx6Z7BJnr9sp3zslS2NOQ/28urQBe1SDG/g5albUAv.HOtkdoAK'
+    }
   ]
 }
 
@@ -31,18 +38,29 @@ async function get (table, id) {
 }
 
 async function upset (table, data) {
+  if (!db[table]) {
+    db[table] = []
+  }
+
   db[table].push(data)
-  const res = await list(table)
-  return res
+  return data
 }
 
 async function remove (table, id) {
   return true
 }
 
+async function query (table, query) {
+  const col = await list(table)
+  const keys = Object.keys(query)
+  const key = keys[0]
+  return col.filter(item => item[key] === query[key])[0] || null
+}
+
 module.exports = {
   list,
   get,
   upset,
-  remove
+  remove,
+  query
 }

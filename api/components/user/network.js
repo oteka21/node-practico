@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const response = require('../../../nerwork/response')
+const response = require('../../../network/response')
 const controller = require('./index')
 
 router.get('/', (req, res) => {
@@ -16,7 +16,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   controller.upset(req.body)
-    .then(list => console.log(list) || response.success(req, res, 'Usuario', list, 200))
+    .then(list => response.success(req, res, 'Usuario', list, 200))
 })
 
 module.exports = router
