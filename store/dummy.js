@@ -21,20 +21,22 @@ const db = {
   ]
 }
 
-function list (table) {
+async function list (table) {
   return db[table]
 }
 
-function get (table, id) {
-  const col = list(table)
-  return col.filter(item => item.id === id)
+async function get (table, id) {
+  const col = await list(table)
+  return col.filter(item => item.id === id)[0]
 }
 
-function upset (table, data) {
+async function upset (table, data) {
   db[table].push(data)
+  const res = await list(table)
+  return res
 }
 
-function remove (table, id) {
+async function remove (table, id) {
   return true
 }
 
